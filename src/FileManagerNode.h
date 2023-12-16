@@ -49,7 +49,7 @@ public:
   void print_tree(int depth = 0) const {
 
     // 1. Base case: if the node is empty, return
-    if (this->children.empty()) {
+    if (this->children.size() == 0 && depth == 0) {
       cout << this->name << " (Empty node)" << endl;
       return;
     }
@@ -59,15 +59,15 @@ public:
       // Print current node with indentation based on depth
       cout << string(depth * 2, ' ') << this->name;
       if (is_folder) {
-        cout << " (Folder)";
+        cout << " (Folder) has " << children.size() << " children";
+        // print all children
+        for (const auto &child : children) {
+          cout << child.name << endl;
+        }
       } else {
         cout << " (File)";
       }
       cout << endl;
-      // Recursively print child nodes
-      for (const auto &child : children) {
-        child.print_tree(depth + 1);
-      }
     }
   }
 
@@ -108,7 +108,12 @@ private:
 
       // 4. if the child is a folder, recursively call this function
       if (fs::is_directory(entry.path())) {
-        build_tree_recursive(child, entry.path());
+        // TODO: create a file called .codeIgnore to ignore files
+        if (entry.path().filename().string() == ".git") {
+          continue;
+        } else {
+          build_tree_recursive(child, entry.path());
+        }
       }
     }
   }
