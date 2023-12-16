@@ -47,7 +47,7 @@ void FileManager::run() {
 
     // if file
     if (entry.is_regular_file()) {
-      dir cout << "File " << entry.path() << std::endl;
+      // div; cout << "File " << entry.path() << std::endl;
       // Process each file
       // analyzeFile(entry.path().string());
     }

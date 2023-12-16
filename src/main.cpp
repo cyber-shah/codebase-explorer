@@ -1,16 +1,18 @@
 
-// main.cpp
-#include "fileManager.h"  // Include the FileManager header file
+#include "FileManagerNode.h"
 
-// Entry point of the program
 int main() {
-    // Instantiate a FileManager object
-    FileManager fileManager;
+  // Example usage of FileManagerNode
+  FileManagerNode root("Root", true);
+  root.add_child(FileManagerNode("FolderA", true));
+  root.add_child(FileManagerNode("File1.txt", false));
 
-    // Call the run method on the FileManager object
-    fileManager.run();
+  root.children[0].add_child(FileManagerNode("SubfolderA1", true));
+  root.children[0].add_child(FileManagerNode("SubfolderA2", true));
+  root.children[0].add_child(FileManagerNode("File2.txt", false));
 
-    // Return 0 to indicate successful execution
-    return 0;
+  // Print the file system tree
+  root.print_tree();
+
+  return 0;
 }
-

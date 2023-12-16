@@ -5,9 +5,8 @@
 // Class declaration for FileManager
 class FileManager {
 public:
-    // Constructor declaration
-    FileManager();
-    // Method declaration
-    void run();
+  // Constructor declaration
+  FileManager();
+  // Method declaration
+  void run();
 };
-

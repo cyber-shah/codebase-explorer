@@ -1,4 +1,6 @@
-#include "src/fileManager.h"
+#ifndef FILE_MANAGER_H
+#define FILE_MANAGER_H
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -14,7 +16,6 @@ class FileManagerNode {
   /**
    * 1. add children, remove children, print all children
    * 2.
-   *
    * */
 
 public:
@@ -46,4 +47,14 @@ public:
       child.print_tree(depth + 1);
     }
   }
+
+  /*
+   * build_tree from a path given, recursively goes into each children to add
+   * files if they are folders
+   * */
+  FileManagerNode build_tree(const string current_dir) {
+    return FileManagerNode("x", true);
+  }
 };
+
+#endif // FILE_MANAGER_H
