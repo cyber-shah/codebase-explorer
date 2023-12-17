@@ -8,11 +8,11 @@ public:
   // Constructor
   cliPrint() {}
   // Recursive function to print all the child nodes
-  void show_tree(const treeInterface &root) const {}
+  void show_tree(const treeInterface &root) const override {}
 
-  void handle_input() const {}
+  void handle_input() const override {}
 
-  void show_error(string error_message) const {}
+  void show_error(string error_message) const override {}
 };
 
 #endif // CLIPRINT_H
