@@ -31,27 +31,25 @@ public:
       : name(node_name), is_folder(is_folder_bool), path(in_path) {}
 
   // Recursive function to print all the child nodes
-  void print_tree(int depth = 0) const {
 
+  void print_tree(int depth = 0) const {
     // 1. Base case: if the node is empty, return
-    if (this->is_folder && this->children.size() == 0) {
-      cout << this->name << " (Empty Folder)" << endl;
+    if (this->is_folder && this->children.empty()) {
+      cout << string(depth * 2, ' ') << this->name << " (Empty Folder)" << endl;
       return;
     } else if (!this->is_folder) {
-      cout << this->name << " (File)" << endl;
+      cout << string(depth * 2, ' ') << this->name << " (File)" << endl;
       return;
     }
 
     // 2. Recursive case: folder and not empty
     else {
-      cout << string(depth * 2, ' ') << this->name;
-      if (is_folder) {
-        cout << " (Folder) has " << this->children.size() << " children"
-             << endl;
-        // recursively call children
-        for (const auto &child : this->children) {
-          child.print_tree(depth + 1);
-        }
+      cout << string(depth * 2, ' ') << this->name << " (Folder) has "
+           << this->children.size() << " children" << endl;
+
+      // recursively call children
+      for (const auto &child : this->children) {
+        child.print_tree(depth + 1);
       }
     }
   }
@@ -80,23 +78,23 @@ private:
 
     // 1. iterate through all the folders in the current directory
     for (const auto &entry : fs::directory_iterator(this->path)) {
-      // 2. create a node for each child
-      FileManagerNode child =
+
+      // 2. add the child to the root node
+      // NOTE: emplace back helps to manage the lifetime of the object
+      // emplace = construct an Element in place
+      FileManagerNode &addedChild = this->children.emplace_back(
           FileManagerNode(extract_name(entry.path()),
-                          fs::is_directory(entry.path()), entry.path());
+                          fs::is_directory(entry.path()), entry.path()));
 
-      // 3. add the child to the root node
-      this->children.push_back(child);
-
-      // 4. if the child is a folder, recursively call this function
-      if (child.is_folder) {
+      // 3. if the child is a folder, recursively call this function
+      if (addedChild.is_folder) {
         // TODO: create a file called .codeIgnore to ignore files
-        if (child.name == ".git") {
+        if (addedChild.name == ".git") {
           continue;
         }
         // call child to build tree recursively
         else {
-          child.build_tree_recursive();
+          addedChild.build_tree_recursive();
         }
       }
     }
