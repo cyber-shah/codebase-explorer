@@ -34,40 +34,31 @@ public:
   // Add Children method
   void add_child(const FileManagerNode &child_node) {
     children.push_back(child_node);
-    cout << "Added " << child_node.name << " to " << this->name << endl;
-
-    // print all children
-    cout << "Children of " << this->name << " are: " << endl;
-    cout << "---------------------" << endl;
-    for (const auto &child : children) {
-      cout << child.name << endl;
-    }
-    cout << "---------------------" << endl;
   }
 
   // Recursive function to print all the child nodes
   void print_tree(int depth = 0) const {
 
     // 1. Base case: if the node is empty, return
-    if (this->children.size() == 0 && depth == 0) {
-      cout << this->name << " (Empty node)" << endl;
+    if (this->is_folder && this->children.size() == 0) {
+      cout << this->name << " (Empty Folder)" << endl;
+      return;
+    } else if (!this->is_folder) {
+      cout << this->name << " (File)" << endl;
       return;
     }
 
-    // 2. Recursive case: print the current node and call the function on all
+    // 2. Recursive case: folder and not empty
     else {
-      // Print current node with indentation based on depth
       cout << string(depth * 2, ' ') << this->name;
       if (is_folder) {
-        cout << " (Folder) has " << children.size() << " children";
-        // print all children
-        for (const auto &child : children) {
-          cout << child.name << endl;
+        cout << " (Folder) has " << this->children.size() << " children"
+             << endl;
+        // recursively call children
+        for (const auto &child : this->children) {
+          child.print_tree(depth + 1);
         }
-      } else {
-        cout << " (File)";
       }
-      cout << endl;
     }
   }
 
