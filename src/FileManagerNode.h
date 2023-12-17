@@ -15,7 +15,6 @@ namespace fs = std::filesystem;
 class FileManagerNode {
   /**
    * 1. add children, remove children, print all children
-   * 2.
    * */
 
 public:
@@ -30,11 +29,6 @@ public:
   FileManagerNode(const string &node_name, const bool &is_folder_bool,
                   const fs::path &in_path)
       : name(node_name), is_folder(is_folder_bool), path(in_path) {}
-
-  // Add Children method
-  void add_child(const FileManagerNode &child_node) {
-    children.push_back(child_node);
-  }
 
   // Recursive function to print all the child nodes
   void print_tree(int depth = 0) const {
@@ -73,7 +67,7 @@ public:
         extract_name(current_dir), fs::is_directory(current_dir), current_dir);
 
     // 2. build tree from here
-    build_tree_recursive(root, current_dir);
+    root.build_tree_recursive();
     // 3. return root
     return root;
   }
@@ -81,29 +75,28 @@ public:
 private:
   /**
    * builds tree recursively from the current node as root node
-   *
    * */
-  static void build_tree_recursive(FileManagerNode &root,
-                                   const fs::path &dir_path) {
+  void build_tree_recursive() {
 
-    // 1. iterate through all the children of the current directory
-    for (const auto &entry : fs::directory_iterator(dir_path)) {
+    // 1. iterate through all the folders in the current directory
+    for (const auto &entry : fs::directory_iterator(this->path)) {
       // 2. create a node for each child
       FileManagerNode child =
           FileManagerNode(extract_name(entry.path()),
                           fs::is_directory(entry.path()), entry.path());
 
       // 3. add the child to the root node
-      root.add_child(child);
-      cout << "Added " << child.name << " to " << root.name << endl;
+      this->children.push_back(child);
 
       // 4. if the child is a folder, recursively call this function
-      if (fs::is_directory(entry.path())) {
+      if (child.is_folder) {
         // TODO: create a file called .codeIgnore to ignore files
-        if (entry.path().filename().string() == ".git") {
+        if (child.name == ".git") {
           continue;
-        } else {
-          build_tree_recursive(child, entry.path());
+        }
+        // call child to build tree recursively
+        else {
+          child.build_tree_recursive();
         }
       }
     }
