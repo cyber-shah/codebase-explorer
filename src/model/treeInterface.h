@@ -1,3 +1,5 @@
+#ifndef TREEINTERFACE_H
+#define TREEINTERFACE_H
 #include <filesystem>
 
 using namespace std;
@@ -9,3 +11,5 @@ public:
 
   virtual ~treeInterface() = default;
 };
+
+#endif // TREEINTERFACE_H

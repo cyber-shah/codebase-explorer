@@ -1,3 +1,5 @@
+#ifndef VIEWINTERFACE_H
+#define VIEWINTERFACE_H
 #include "../model/treeInterface.h"
 #include <iostream>
 #include <string>
@@ -17,3 +19,5 @@ public:
   // virtual destructor
   virtual ~viewInterface() = default;
 };
+
+#endif // VIEWINTERFACE_H

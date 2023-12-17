@@ -1,12 +1,13 @@
 
-#include <filesystem>
-using namespace std;
-namespace fs = std::filesystem;
-
+#include "../model/dirTree.h"
+#include "../view/cliPrint.h"
 #include "controller.h"
 
 int main() {
-  treeInterface root;
-  root = root.buildTree(fs::current_path());
-  controller con = con(cliView(), ;
+  treeInterface treeType = *new dirTree();
+  viewInterface view = *new cliPrint();
+  //
+  Controller con = new Controller(view, treeType);
+  con.build_tree();
+  con.show_tree();
 }
