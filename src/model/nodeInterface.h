@@ -30,6 +30,14 @@ public:
     this->set_size();
   }
 
+  /**
+   * @brief add_child adds a child to the node
+   * adds a child to the node by using the path
+   * */
+  void add_child(std::shared_ptr<nodeInterface> child) {
+    this->children.push_back(child);
+  }
+
 private:
   void set_name(string name) { this->name = name; }
   void set_is_folder(bool is_folder) { this->is_folder = is_folder; }

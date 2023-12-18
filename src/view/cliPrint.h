@@ -29,8 +29,8 @@ public:
       }
 
       // Print the current node
-      std::cout << "|-- " << currentNode->name << currentNode->sizeInBytes
-                << std::endl;
+      std::cout << "|-- " << currentNode->name
+                << " size: " << currentNode->sizeInBytes << std::endl;
 
       // Push children onto the stack with increased depth
       for (const auto &child : currentNode->children) {

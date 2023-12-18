@@ -58,7 +58,7 @@ private:
       child->update_attributes();
 
       // 3. add the child to children vector of the current node
-      current_node->children.push_back(child);
+      current_node->add_child(child);
 
       // 4. if the child is a folder, recursively call this function
       if (child->is_folder) {
