@@ -16,7 +16,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 /**
- * @brief The dirTree class defines a directory tree 
+ * @brief The dirTree class defines a directory tree
  * */
 class dirTreeManager : public treeInterface {
 public:
@@ -31,9 +31,9 @@ public:
   std::shared_ptr<nodeInterface>
   build_tree(const fs::path &current_dir) override {
     // 1. create a root node here
-    nodeInterface root_node =
-        nodeInterface(current_dir.filename().string(),
-                    fs::is_directory(current_dir), current_dir);
+    nodeInterface root_node;
+    root_node.set_path(current_dir);
+    root_node.update_attributes();
 
     // 2. set the root node by using make_shared
     root = std::make_shared<nodeInterface>(root_node);
@@ -48,34 +48,32 @@ private:
    * */
   static void
   build_tree_recursive(std::shared_ptr<nodeInterface> current_node) {
-    
 
-      // 1. iterate through all the ENTRIES in the current directory
-      for (const auto &entry : fs::directory_iterator(current_node->path)) {
+    // 1. iterate through all the ENTRIES in the current directory
+    for (const auto &entry : fs::directory_iterator(current_node->path)) {
 
-        // 2. create a child node for each entry
-        std::shared_ptr<nodeInterface> child = std::make_shared<nodeInterface>(
-            entry.path().filename().string(), fs::is_directory(entry.path()),
-            entry.path());
+      // 2. create a child node for each entry
+      std::shared_ptr<nodeInterface> child = std::make_shared<nodeInterface>();
+      child->set_path(entry.path());
+      child->update_attributes();
 
-        // 3. add the child to children vector of the current node
-        current_node->children.push_back(child);
+      // 3. add the child to children vector of the current node
+      current_node->children.push_back(child);
 
-        // 4. if the child is a folder, recursively call this function
-        if (child->is_folder) {
-          // TODO: create a file called .codeIgnore to ignore files
-          if (child->name == ".git") {
-            continue;
-          }
-          // call dirTree's static function to build tree recursively for the
-          // child
-          else {
-            build_tree_recursive(child);
-          }
+      // 4. if the child is a folder, recursively call this function
+      if (child->is_folder) {
+        // TODO: create a file called .codeIgnore to ignore files
+        if (child->name == ".git") {
+          continue;
+        }
+        // call dirTree's static function to build tree recursively for the
+        // child
+        else {
+          build_tree_recursive(child);
         }
       }
-
-    };
+    }
+  };
 };
 
 #endif
