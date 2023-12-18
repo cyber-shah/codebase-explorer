@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <string>
@@ -20,7 +21,7 @@ namespace fs = std::filesystem;
  * */
 class dirTreeManager : public treeInterface {
 public:
-  nodeInterface root;
+  std::shared_ptr<nodeInterface> root;
 
   /** Constructor */
   dirTreeManager() {}
@@ -30,47 +31,48 @@ public:
    * @param current_dir the current directory
    * @return the root node of the tree
    * */
-  nodeInterface build_tree(const fs::path &current_dir) override {
+  std::shared_ptr<nodeInterface>
+  build_tree(const fs::path &current_dir) override {
     // 1. create a root node here
     dirTreeNode root_node =
         dirTreeNode(current_dir.filename().string(),
                     fs::is_directory(current_dir), current_dir);
-    // 2. build tree from here
-    build_tree_recursive(root_node);
-    // 3. return root
-    this->root = (root_node);
-    cout << "root is " << this->root.name << endl;
-    cout << "root's children are " << endl;
-    for (auto &child : this->root.children) {
-      cout << child.name << endl;
-    }
-    return root_node;
+
+    // 2. set the root node by using make_shared
+    root = std::make_shared<dirTreeNode>(root_node);
+    // 3. build tree from this root node
+    build_tree_recursive(root);
+    return root;
   }
 
 private:
   /**
    * builds tree recursively from the current node as the root node
    * */
-  static void build_tree_recursive(dirTreeNode &current_node) {
-    // 1. iterate through all the folders in the current directory
-    for (const auto &entry : fs::directory_iterator(current_node.path)) {
-      // 2. add the child to the root node
-      // NOTE: emplace back helps to manage the lifetime of the object
-      // emplace = construct an Element in place
-      dirTreeNode &addedChild = current_node.children.emplace_back(
+  static void
+  build_tree_recursive(std::shared_ptr<nodeInterface> current_node) {
+
+    // 1. iterate through all the ENTRIES in the current directory
+    for (const auto &entry : fs::directory_iterator(current_node->path)) {
+
+      // 2. create a child node
+      dirTreeNode child =
           dirTreeNode(entry.path().filename().string(),
-                      fs::is_directory(entry.path()), entry.path()));
+                      fs::is_directory(entry.path()), entry.path());
+
+      // 3. add the child to children vector
+      current_node.children.push_back(child);
 
       // 3. if the child is a folder, recursively call this function
-      if (addedChild.is_folder) {
+      if (child.is_folder) {
         // TODO: create a file called .codeIgnore to ignore files
-        if (addedChild.name == ".git") {
+        if (child.name == ".git") {
           continue;
         }
         // call dirTree's static function to build tree recursively for the
         // child
         else {
-          build_tree_recursive(addedChild);
+          build_tree_recursive(child);
         }
       }
     }

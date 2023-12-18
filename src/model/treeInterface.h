@@ -9,9 +9,10 @@ namespace fs = std::filesystem;
 
 class treeInterface {
 public:
-  nodeInterface root;
+  std::shared_ptr<nodeInterface> root;
 
-  virtual nodeInterface build_tree(const fs::path &current_dir) = 0;
+  virtual std::shared_ptr<nodeInterface>
+  build_tree(const fs::path &current_dir) = 0;
 
   virtual ~treeInterface() = default;
 };
