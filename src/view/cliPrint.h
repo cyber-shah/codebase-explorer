@@ -13,21 +13,27 @@ public:
 
   // TODO: check how to optimize this function instead of making copies of
   // pointers
+
   void show_tree(const std::shared_ptr<nodeInterface> root) const override {
-    // stack of pointers to nodeInterfaces
-    stack<std::shared_ptr<nodeInterface>> nodeStack;
-    nodeStack.push(root);
+    // stack of pairs: node pointer and depth
+    std::stack<std::pair<std::shared_ptr<nodeInterface>, int>> nodeStack;
+    nodeStack.push({root, 0});
 
     while (!nodeStack.empty()) {
-      const std::shared_ptr<nodeInterface> currentNode = nodeStack.top();
+      auto [currentNode, depth] = nodeStack.top();
       nodeStack.pop();
 
-      // Print the current node
-      cout << currentNode->name << endl;
+      // Print indentation
+      for (int i = 0; i < depth; ++i) {
+        std::cout << "|   ";
+      }
 
-      // Push children onto the stack
-      for (const auto child : currentNode->children) {
-        nodeStack.push(child);
+      // Print the current node
+      std::cout << "|-- " << currentNode->name << std::endl;
+
+      // Push children onto the stack with increased depth
+      for (const auto &child : currentNode->children) {
+        nodeStack.push({child, depth + 1});
       }
     }
   }
