@@ -1,8 +1,7 @@
 #include "../model/treeInterface.h"
 #include "../view/viewInterface.h"
 
-using namespace std;
-namespace fs = std::filesystem;
+#include <filesystem>
 
 class Controller {
 public:
@@ -17,7 +16,7 @@ public:
    * @brief Build the tree
    * Takes no arguments but passes the current path to the tree builder
    */
-  void build_tree() { treeType.build_tree(fs::current_path()); }
+  void build_tree(std::filesystem::path path) { treeType.build_tree(path); }
 
   void show_tree() { view.show_tree(treeType.root); }
 

@@ -2,17 +2,13 @@
 #define TREEINTERFACE_H
 #include "nodeInterface.h"
 #include <filesystem>
-#include <vector>
-
-using namespace std;
-namespace fs = std::filesystem;
 
 class treeInterface {
 public:
   std::shared_ptr<nodeInterface> root;
 
   virtual std::shared_ptr<nodeInterface>
-  build_tree(const fs::path &current_dir) = 0;
+  build_tree(const std::filesystem::path &current_dir) = 0;
 
   virtual ~treeInterface() = default;
 };
