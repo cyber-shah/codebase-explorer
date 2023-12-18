@@ -1,6 +1,8 @@
 #ifndef DIRTREE_H
 #define DIRTREE_H
 
+#include "dirTreeNode.h"
+#include "nodeInterface.h"
 #include "treeInterface.h"
 #include <filesystem>
 #include <fstream>
@@ -16,24 +18,33 @@ namespace fs = std::filesystem;
 /**
  * @brief The dirTree class defines a directory tree, made up of dirTreeNodes
  * */
-class dirTree : public treeInterface {
+class dirTreeManager : public treeInterface {
 public:
+  nodeInterface root;
+
   /** Constructor */
-  dirTree() {}
+  dirTreeManager() {}
 
   /*
    * @brief build_tree builds the tree from the current directory
    * @param current_dir the current directory
    * @return the root node of the tree
    * */
-  dirTreeNode build_tree(const fs::path &current_dir) override {
+  nodeInterface build_tree(const fs::path &current_dir) override {
     // 1. create a root node here
-    dirTreeNode root = dirTreeNode(current_dir.filename().string(),
-                                   fs::is_directory(current_dir), current_dir);
+    dirTreeNode root_node =
+        dirTreeNode(current_dir.filename().string(),
+                    fs::is_directory(current_dir), current_dir);
     // 2. build tree from here
-    build_tree_recursive(root);
+    build_tree_recursive(root_node);
     // 3. return root
-    return root;
+    this->root = (root_node);
+    cout << "root is " << this->root.name << endl;
+    cout << "root's children are " << endl;
+    for (auto &child : this->root.children) {
+      cout << child.name << endl;
+    }
+    return root_node;
   }
 
 private:

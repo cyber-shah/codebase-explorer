@@ -4,7 +4,7 @@
 #include "view/cliPrint.h"
 
 int main() {
-  dirTree treeType;
+  dirTreeManager treeType;
   cliPrint view;
 
   Controller con(view, treeType);

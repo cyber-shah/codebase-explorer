@@ -19,7 +19,7 @@ public:
    */
   void build_tree() { treeType.build_tree(fs::current_path()); }
 
-  void show_tree() { view.show_tree(treeType); }
+  void show_tree() { view.show_tree(treeType.root); }
 
 private:
 };
