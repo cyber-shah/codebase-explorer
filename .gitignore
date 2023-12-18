@@ -5,3 +5,9 @@
 # Ignore executables
 *.exe
 *.out
+src/controller/controller.h.gch
+src/model/dirTree.h.gch
+src/model/nodeInterface.h.gch
+src/model/treeInterface.h.gch
+src/view/cliPrint.h.gch
+src/view/viewInterface.h.gch
