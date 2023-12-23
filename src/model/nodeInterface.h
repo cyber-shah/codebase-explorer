@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <memory>
+#include <unordered_map>
 #include <vector>
 using namespace std;
 namespace fs = std::filesystem;
@@ -12,7 +13,7 @@ public:
   string name;
   bool is_folder;
   fs::path path;
-  vector<std::shared_ptr<nodeInterface>> dir_children;
+  unordered_map<fs::path, std::shared_ptr<nodeInterface>>;
   vector<std::shared_ptr<nodeInterface>> dep_children;
   int sizeInBytes;
 
