@@ -12,7 +12,8 @@ public:
   string name;
   bool is_folder;
   fs::path path;
-  vector<std::shared_ptr<nodeInterface>> children;
+  vector<std::shared_ptr<nodeInterface>> dir_children;
+  vector<std::shared_ptr<nodeInterface>> dep_children;
   int sizeInBytes;
 
   // Constructor
@@ -34,8 +35,12 @@ public:
    * @brief add_child adds a child to the node
    * adds a child to the node by using the path
    * */
-  void add_child(std::shared_ptr<nodeInterface> child) {
-    this->children.push_back(child);
+  void add_child_dir(std::shared_ptr<nodeInterface> child) {
+    this->dir_children.push_back(child);
+  }
+
+  void add_child_dep(std::shared_ptr<nodeInterface> child) {
+    this->dep_children.push_back(child);
   }
 
 private:

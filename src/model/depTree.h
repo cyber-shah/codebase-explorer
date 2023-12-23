@@ -32,11 +32,16 @@ private:
     // check if this is a folder
     else if (std::filesystem::is_directory(root->path)) {
       std::cout << "This is a directory" << std::endl;
+      for (auto &child : root->dir_children) {
+        parse_dependencies_recursive(child);
+      }
       return;
     }
+
     // check if it ends with .cpp or .h
-    else if (root->path.extension() != ".cpp" &&
-             root->path.extension() != ".h") {
+    else if (fs::path(root->path).extension().string() != ".cpp" &&
+             fs::path(root->path).extension().string() != ".h" &&
+             !fs::path(root->path).extension().empty()) {
       std::cout << "This is not a cpp or h file" << std::endl;
       return;
     }
@@ -45,6 +50,11 @@ private:
 
     while (std::getline(inputFile, line)) {
       // trim the line
+      if (line.empty())
+        continue;
+      else if (line.find_first_not_of(" \t") == std::string::npos)
+        continue;
+
       size_t first_non_space = line.find_first_not_of(" \t");
       size_t last_non_space = line.find_last_not_of(" \t");
       line = line.substr(first_non_space, last_non_space - first_non_space + 1);
@@ -58,18 +68,12 @@ private:
         // check if the file name is valid and print it
         if (start != std::string::npos && end != std::string::npos) {
           std::string fileName = line.substr(start, end - start);
-          std::cout << fileName << std::endl;
+          root->add_child_dep(std::make_shared<nodeInterface>(fileName));
         }
       }
     }
 
     inputFile.close();
-
-    if (root->children.size() > 0) {
-      for (auto child : root->children) {
-        parse_dependencies_recursive(child);
-      }
-    }
   }
 };
 
