@@ -36,10 +36,10 @@ public:
     root_node.update_attributes();
 
     // 2. set the root node by using make_shared
-    root = std::make_shared<nodeInterface>(root_node);
+    dirRoot = std::make_shared<nodeInterface>(root_node);
     // 3. build tree from this root node
-    build_tree_recursive(root);
-    return root;
+    build_tree_recursive(dirRoot);
+    return dirRoot;
   }
 
 private:
