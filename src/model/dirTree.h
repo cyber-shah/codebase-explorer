@@ -18,8 +18,10 @@ namespace fs = std::filesystem;
 /**
  * @brief The dirTree class defines a directory tree
  * */
-class dirTreeManager : public treeInterface {
+class dirTreeManager {
 public:
+  std::shared_ptr<nodeInterface> dirRoot;
+
   /** Constructor */
   dirTreeManager() {}
 
@@ -28,15 +30,14 @@ public:
    * @param current_dir the current directory
    * @return the root node of the tree
    * */
-  std::shared_ptr<nodeInterface>
-  build_tree(const fs::path &current_dir) override {
+  std::shared_ptr<nodeInterface> build_tree(const fs::path &current_dir) {
     // 1. create a root node here
     nodeInterface root_node;
     root_node.set_path(current_dir);
     root_node.update_attributes();
 
     // 2. set the root node by using make_shared
-    dirRoot = std::make_shared<nodeInterface>(root_node);
+    this->dirRoot = std::make_shared<nodeInterface>(root_node);
     // 3. build tree from this root node
     build_tree_recursive(dirRoot);
     return dirRoot;
