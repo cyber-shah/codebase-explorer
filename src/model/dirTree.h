@@ -48,7 +48,6 @@ public:
     return dirRoot;
   }
 
-  /**
   std::shared_ptr<nodeInterface>
   find_node_by_path(const fs::path &path_to_node) {
     auto node = dirMap.find(path_to_node);
@@ -58,7 +57,6 @@ public:
       return nullptr;
     }
   }
-  */
 
   std::shared_ptr<nodeInterface>
   find_node_by_name(const std::string &nodeName) {

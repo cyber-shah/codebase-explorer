@@ -23,7 +23,6 @@ public:
 
 private:
   void parse_dependencies_recursive(std::shared_ptr<nodeInterface> root) {
-    std::cout << "Parsing dependencies for " << root->path << std::endl;
     std::ifstream inputFile(root->path);
 
     // TODO: change this to output to a view object later
@@ -33,23 +32,19 @@ private:
     }
     // check if this is a folder
     else if (std::filesystem::is_directory(root->path)) {
-      std::cout << "This is a directory" << std::endl;
       for (const auto &child : root->dir_children) {
         parse_dependencies_recursive(child.second);
       }
       return;
     }
-
     // check if it ends with .cpp or .h
     else if (fs::path(root->path).extension().string() != ".cpp" &&
              fs::path(root->path).extension().string() != ".h" &&
              !fs::path(root->path).extension().empty()) {
-      std::cout << "This is not a cpp or h file" << std::endl;
       return;
     }
 
     std::string line;
-
     while (std::getline(inputFile, line)) {
       // trim the line
       if (line.empty())
@@ -70,8 +65,17 @@ private:
         // check if the file name is valid and print it
         if (start != std::string::npos && end != std::string::npos) {
           std::string fileName = line.substr(start, end - start);
-          auto child = dirTree.find_node_by_name(root->name);
-          root->add_child_dep(child);
+          // Extract just the filename from the path
+          std::string extractedName = fs::path(fileName).filename().string();
+
+          auto child = dirTree.find_node_by_name(extractedName);
+          if (child != nullptr) {
+            root->add_child_dep(child);
+            for (const auto &child : root->dep_children) {
+              std::cout << root->name << " Depends on: " << child.second->name
+                        << std::endl;
+            }
+          }
         }
       }
     }

@@ -1,5 +1,4 @@
 #include "controller/controller.h"
-#include "model/dirTree.h"
 #include "view/cliPrint.h"
 
 int main() {
