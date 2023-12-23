@@ -9,4 +9,5 @@ int main() {
   con.build_tree(std::filesystem::current_path());
   con.parse_dependencies();
   con.show_tree();
+  con.show_dependencies();
 }

@@ -12,7 +12,8 @@ public:
   std::shared_ptr<nodeInterface> root;
 
   // Constructor
-  Controller(viewInterface &view) : view(view), dirTree(), depTree() {
+  Controller(viewInterface &view)
+      : view(view), dirTree(), depTree(this->dirTree) {
     // Additional initialization if needed
   }
 
@@ -26,6 +27,8 @@ public:
 
   void parse_dependencies() { depTree.parse_dependencies(root); }
   void show_tree() { view.show_tree(dirTree.dirRoot); }
+
+  void show_dependencies() { view.show_dependencies(root); }
 
 private:
 };

@@ -1,10 +1,12 @@
 #ifndef NODEINTERFACE_H
 #define NODEINTERFACE_H
 
+#include "PathHash.h"
 #include <filesystem>
 #include <memory>
 #include <unordered_map>
 #include <vector>
+
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -13,8 +15,10 @@ public:
   string name;
   bool is_folder;
   fs::path path;
-  unordered_map<fs::path, std::shared_ptr<nodeInterface>>;
-  vector<std::shared_ptr<nodeInterface>> dep_children;
+  unordered_map<fs::path, std::shared_ptr<nodeInterface>, PathHash>
+      dir_children;
+  unordered_map<fs::path, std::shared_ptr<nodeInterface>, PathHash>
+      dep_children;
   int sizeInBytes;
 
   // Constructor
@@ -37,11 +41,11 @@ public:
    * adds a child to the node by using the path
    * */
   void add_child_dir(std::shared_ptr<nodeInterface> child) {
-    this->dir_children.push_back(child);
+    this->dir_children.insert_or_assign(fs::relative(child->path), child);
   }
 
   void add_child_dep(std::shared_ptr<nodeInterface> child) {
-    this->dep_children.push_back(child);
+    this->dep_children.insert_or_assign(fs::relative(child->path), child);
   }
 
 private:

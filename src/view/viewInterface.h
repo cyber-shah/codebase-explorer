@@ -14,6 +14,8 @@ public:
 
   virtual void show_error(const std::string &error_message) const = 0;
 
+  virtual void
+  show_dependencies(const std::shared_ptr<nodeInterface> root) const = 0;
   // virtual destructor
   virtual ~viewInterface() = default;
 };

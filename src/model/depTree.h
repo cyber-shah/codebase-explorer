@@ -1,5 +1,6 @@
 #ifndef DEPTREE_H
 #define DEPTREE_H
+#include "dirTree.h"
 #include "nodeInterface.h"
 #include "treeInterface.h"
 #include <filesystem>
@@ -11,11 +12,12 @@ using namespace std;
 
 class depTreeManager {
 public:
+  dirTreeManager &dirTree;
+
   // constructor
-  depTreeManager() {}
+  depTreeManager(dirTreeManager &dirTree) : dirTree(dirTree) {}
 
   void parse_dependencies(std::shared_ptr<nodeInterface> root) {
-
     parse_dependencies_recursive(root);
   }
 
@@ -32,8 +34,8 @@ private:
     // check if this is a folder
     else if (std::filesystem::is_directory(root->path)) {
       std::cout << "This is a directory" << std::endl;
-      for (auto &child : root->dir_children) {
-        parse_dependencies_recursive(child);
+      for (const auto &child : root->dir_children) {
+        parse_dependencies_recursive(child.second);
       }
       return;
     }
@@ -68,7 +70,8 @@ private:
         // check if the file name is valid and print it
         if (start != std::string::npos && end != std::string::npos) {
           std::string fileName = line.substr(start, end - start);
-          root->add_child_dep(std::make_shared<nodeInterface>(fileName));
+          auto child = dirTree.find_node_by_name(root->name);
+          root->add_child_dep(child);
         }
       }
     }
