@@ -38,6 +38,7 @@ public:
   }
 
 private:
+  /**
   void add_children_recursive(json &dir_tree,
                               std::shared_ptr<nodeInterface> root) const {
 
@@ -65,6 +66,29 @@ private:
 
     // add the array of children to the root json object
     dir_tree["children"] = children_array;
+  }
+  */
+
+  void add_children_recursive(json &dir_tree,
+                              std::shared_ptr<nodeInterface> root) const {
+    // for all children craete a json object and add it to root's children
+    for (auto &child : root->dir_children) {
+      // create a json object for the child
+      json child_json;
+      child_json["name"] = child.second->name;
+      child_json["path"] = child.second->path;
+      child_json["size"] = child.second->size;
+      child_json["is_folder"] = child.second->is_folder;
+
+      dir_tree["children"] = json::array();
+      dir_tree["children"].push_back(child_json);
+
+      // if child has children, add them recursively
+      // dir children is going to be a pair of path and node pointer
+      if (!child.second->dir_children.empty()) {
+        add_children_recursive(child_json, child.second);
+      }
+    }
   }
 };
 
