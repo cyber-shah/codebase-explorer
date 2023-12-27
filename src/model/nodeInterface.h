@@ -19,7 +19,7 @@ public:
       dir_children;
   unordered_map<fs::path, std::shared_ptr<nodeInterface>, PathHash>
       dep_children;
-  int sizeInBytes;
+  int size;
 
   // Constructor
   nodeInterface() {}
@@ -58,7 +58,7 @@ private:
    * */
   void set_size() {
     if (this->is_folder != true) {
-      this->sizeInBytes = fs::file_size(path);
+      this->size = fs::file_size(path);
     }
   }
 };
