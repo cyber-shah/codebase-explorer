@@ -11,10 +11,12 @@ public:
   // Constructor
   cliPrint() {}
 
-  // TODO: check how to optimize this function instead of making copies of
-  // pointers
-
-  void show_tree(const std::shared_ptr<nodeInterface> root) const override {
+  /**
+   * @brief show_dir_tree
+   * @param root pointer to the root of the tree to be printed
+   * @return void just prints the tree
+   */
+  void show_dir_tree(const std::shared_ptr<nodeInterface> root) const override {
     // stack of pairs: node pointer and depth
     std::stack<std::pair<std::shared_ptr<nodeInterface>, int>> nodeStack;
     nodeStack.push({root, 0});
@@ -34,28 +36,6 @@ public:
 
       // Push children onto the stack with increased depth
       for (const auto &child : currentNode->dir_children) {
-        nodeStack.push({child.second, depth + 1});
-      }
-    }
-  }
-
-  void
-  show_dependencies(const std::shared_ptr<nodeInterface> root) const override {
-    // stack of pairs: node pointer and depth
-    std::stack<std::pair<std::shared_ptr<nodeInterface>, int>> nodeStack;
-    nodeStack.push({root, 0});
-    while (!nodeStack.empty()) {
-      auto [currentNode, depth] = nodeStack.top();
-      nodeStack.pop();
-      // Print indentation
-      for (int i = 0; i < depth; ++i) {
-        std::cout << "|   ";
-      }
-      // Print the current node
-      std::cout << "|-- " << currentNode->name
-                << " size: " << currentNode->sizeInBytes << std::endl;
-      // Push children onto the stack with increased depth
-      for (const auto &child : currentNode->dep_children) {
         nodeStack.push({child.second, depth + 1});
       }
     }

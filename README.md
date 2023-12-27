@@ -6,4 +6,5 @@ TODO:
   - gprof or perf for CPU profiling
   - valgrind for memory profiling
   - file size profiling
+4. convert perf report to a json object, which can be used to display the graph
 

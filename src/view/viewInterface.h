@@ -8,7 +8,11 @@ class viewInterface {
 public:
   // pure virtual function to show the tree can be passed any treeInterface
   // and can be implemented by both CLI and GUI
-  virtual void show_tree(const std::shared_ptr<nodeInterface> root) const = 0;
+  virtual void
+  show_dir_tree(const std::shared_ptr<nodeInterface> root) const = 0;
+
+  virtual void
+  show_dep_tree(const std::shared_ptr<nodeInterface> root) const = 0;
 
   virtual void handle_input() const = 0;
 
