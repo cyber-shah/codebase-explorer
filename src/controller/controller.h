@@ -28,7 +28,7 @@ public:
   void parse_dependencies() { depTree.parse_dependencies(root); }
   void show_dir_tree() { view.show_dir_tree(dirTree.dirRoot); }
 
-  void show_dependencies() { view.show_dependencies(root); }
+  void show_dependencies() { view.show_dep_tree(root); }
 
 private:
 };

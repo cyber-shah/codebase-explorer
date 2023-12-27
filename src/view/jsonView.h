@@ -51,7 +51,7 @@ private:
       dir_tree["children"].push_back(child_json);
 
       // if child has children, add them recursively
-      if (child.second->dir_children.size() > 0) {
+      if (!child.second->dir_children.empty()) {
         add_children_recursive(child_json, child.second);
       }
     }
