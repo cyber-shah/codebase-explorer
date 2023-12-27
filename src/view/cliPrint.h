@@ -31,8 +31,8 @@ public:
       }
 
       // Print the current node
-      std::cout << "|-- " << currentNode->name
-                << " size: " << currentNode->sizeInBytes << std::endl;
+      std::cout << "|-- " << currentNode->name << " size: " << currentNode->size
+                << std::endl;
 
       // Push children onto the stack with increased depth
       for (const auto &child : currentNode->dir_children) {
@@ -41,9 +41,12 @@ public:
     }
   }
 
-  void handle_input() const override { return; }
+  void show_dep_tree(const std::shared_ptr<nodeInterface> root) const override {
+  }
 
-  void show_error(const string &error_message) const override { return; }
+  void handle_input() const { return; }
+
+  void show_error(const string &error_message) const { return; }
 };
 
 #endif // CLIPRINT_H

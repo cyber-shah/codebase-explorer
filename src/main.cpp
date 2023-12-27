@@ -1,4 +1,5 @@
 #include "controller/controller.h"
+#include "view/cliPrint.h"
 #include "view/jsonView.h"
 
 int main() {
