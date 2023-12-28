@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/shah/Desktop/personal-website/codebase-explorer",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/Cellar/nlohmann-json/3.11.3/include -isystem /opt/homebrew/include -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -o CMakeFiles/a.out.dir/src/main.cpp.o -c /Users/shah/Desktop/personal-website/codebase-explorer/src/main.cpp",
+  "file": "/Users/shah/Desktop/personal-website/codebase-explorer/src/main.cpp",
+  "output": "CMakeFiles/a.out.dir/src/main.cpp.o"
+}
+]

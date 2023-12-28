@@ -13,3 +13,4 @@ src/view/cliPrint.h.gch
 src/view/viewInterface.h.gch
 a.out
 a.out.dSYM/Contents/Resources
+frontend/node_modules

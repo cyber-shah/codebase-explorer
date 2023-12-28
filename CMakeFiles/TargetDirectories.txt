@@ -1,0 +1,3 @@
+/Users/shah/Desktop/personal-website/codebase-explorer/CMakeFiles/a.out.dir
+/Users/shah/Desktop/personal-website/codebase-explorer/CMakeFiles/edit_cache.dir
+/Users/shah/Desktop/personal-website/codebase-explorer/CMakeFiles/rebuild_cache.dir
