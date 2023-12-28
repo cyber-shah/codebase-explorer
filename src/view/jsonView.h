@@ -39,17 +39,9 @@ public:
     // create the root json object
     json dep_tree;
 
-    dep_tree["root_node"] = {
-        {"ptr", reinterpret_cast<std::uintptr_t>(root.get())},
-        {"name", root->name},
-        {"path", root->path},
-        {"size", root->size},
-        {"is_folder", root->is_folder},
-    };
-
-    // add each child recursively
-    add_children_recursive_dep(dep_tree["root_node"], root);
-    cout << dep_tree.dump(2) << endl;
+    // start from each file
+    // create a stack that creates like a TREE of that node and its dependencies
+    // then add that tree to the dep_tree
   }
 
 private:

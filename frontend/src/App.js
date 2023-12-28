@@ -1,23 +1,57 @@
 import logo from './logo.svg';
 import './App.css';
+import LinePlot from './Components/LinePlot.js';
+
+const data = {
+  name: "flare",
+  children: [
+    {
+      name: "analytics",
+      children: [
+        // ... children of "analytics" node
+      ]
+    },
+    {
+      name: "animate",
+      children: [
+        {
+          name: "Easing",
+          size: 17010
+        },
+        {
+          name: "FunctionSequence",
+          size: 5842
+        },
+        {
+          name: "interpolate",
+          children: [
+            // ... children of "interpolate" node
+          ]
+        },
+        // ... other children of "animate" node
+      ]
+    },
+    {
+      name: "data",
+      children: [
+        // ... children of "data" node
+      ]
+    },
+    {
+      name: "display",
+      children: [
+        // ... children of "display" node
+      ]
+    },
+    // ... other top-level nodes
+  ]
+};
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LinePlot data={data} />
     </div>
   );
 }
