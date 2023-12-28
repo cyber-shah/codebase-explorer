@@ -1,0 +1,139 @@
+{
+  "root_node": {
+    "dir_children": [
+      {
+        "dir_children": [
+          {
+            "is_folder": false,
+            "name": "main.cpp",
+            "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/main.cpp",
+            "size": 272
+          },
+          {
+            "dir_children": [
+              {
+                "is_folder": false,
+                "name": "viewInterface.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/view/viewInterface.h",
+                "size": 539
+              },
+              {
+                "is_folder": false,
+                "name": "cliPrint.h.gch",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/view/cliPrint.h.gch",
+                "size": 13583048
+              },
+              {
+                "is_folder": false,
+                "name": "jsonView.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/view/jsonView.h",
+                "size": 4196
+              },
+              {
+                "is_folder": false,
+                "name": "viewInterface.h.gch",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/view/viewInterface.h.gch",
+                "size": 12951060
+              },
+              {
+                "is_folder": false,
+                "name": "cliPrint.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/view/cliPrint.h",
+                "size": 1360
+              }
+            ],
+            "is_folder": true,
+            "name": "view",
+            "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/view",
+            "size": 0
+          },
+          {
+            "dir_children": [
+              {
+                "is_folder": false,
+                "name": "nodeInterface.h.gch",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/nodeInterface.h.gch",
+                "size": 12942388
+              },
+              {
+                "is_folder": false,
+                "name": "depTree.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/depTree.h",
+                "size": 2636
+              },
+              {
+                "is_folder": false,
+                "name": "nodeInterface.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/nodeInterface.h",
+                "size": 1619
+              },
+              {
+                "is_folder": false,
+                "name": "dirTree.h.gch",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/dirTree.h.gch",
+                "size": 13312812
+              },
+              {
+                "is_folder": false,
+                "name": "dirTree.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/dirTree.h",
+                "size": 2948
+              },
+              {
+                "is_folder": false,
+                "name": "treeInterface.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/treeInterface.h",
+                "size": 359
+              },
+              {
+                "is_folder": false,
+                "name": "depTree.h.gch",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/depTree.h.gch",
+                "size": 13336052
+              },
+              {
+                "is_folder": false,
+                "name": "PathHash.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model/PathHash.h",
+                "size": 213
+              }
+            ],
+            "is_folder": true,
+            "name": "model",
+            "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/model",
+            "size": 0
+          },
+          {
+            "dir_children": [
+              {
+                "is_folder": false,
+                "name": "controller.h",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/controller/controller.h",
+                "size": 866
+              },
+              {
+                "is_folder": false,
+                "name": "controller.h.gch",
+                "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/controller/controller.h.gch",
+                "size": 13342424
+              }
+            ],
+            "is_folder": true,
+            "name": "controller",
+            "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src/controller",
+            "size": 0
+          }
+        ],
+        "is_folder": true,
+        "name": "src",
+        "path": "/Users/shah/Desktop/personal-website/codebase-explorer/src",
+        "size": 0
+      },
+    ],
+    "is_folder": true,
+    "name": "codebase-explorer",
+    "path": "/Users/shah/Desktop/personal-website/codebase-explorer",
+    "ptr": 105553152966680,
+    "size": 0
+  }
+}
