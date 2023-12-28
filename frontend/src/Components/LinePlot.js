@@ -15,7 +15,6 @@ export default function LinePlot({
 
     const root = d3.hierarchy(data, d => d.dir_children);
 
-
     const dx = 10;
     const dy = width / (root.height + 1);
 
