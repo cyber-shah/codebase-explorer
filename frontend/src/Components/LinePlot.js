@@ -8,18 +8,18 @@ export default function LinePlot({
   const ref = useRef();
 
   useEffect(() => {
+    // width of the svg
     const width = 928;
 
-    // Compute the tree height; this approach will allow the height of the
-    // SVG to scale according to the breadth (width) of the tree layout.
-
+    // tells d3 to use the data as a hierarchy and to use the dir_children property for the children
     const root = d3.hierarchy(data, d => d.dir_children);
 
-    const dx = 10;
-    const dy = width / (root.height + 1);
+    // set the width between nodes
+    const dx = 150;
+    const dy = 20;
 
     // Create a tree layout.
-    const tree = d3.tree().nodeSize([dx, dy]);
+    const tree = d3.tree().nodeSize([dy, dx]);
 
     // Sort the tree and apply the layout.
     root.sort((a, b) => d3.ascending(a.data.name, b.data.name));
