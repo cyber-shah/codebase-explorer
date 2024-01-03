@@ -3,7 +3,6 @@ import React, { useRef, useEffect } from "react";
 
 
 const drag = simulation => {
-
   function dragstarted(event, d) {
     if (!event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
@@ -28,7 +27,7 @@ const drag = simulation => {
 }
 
 
-
+const createSVG = ((props) => { });
 
 
 export default function LinePlot(props) {
@@ -36,7 +35,6 @@ export default function LinePlot(props) {
   const ref = useRef();
 
   useEffect(() => {
-
     // ------------------------ SVG SETUP ------------------------
     // width of the svg
     const width = 928;
@@ -45,7 +43,7 @@ export default function LinePlot(props) {
     // set the width between nodes
     const dx = props.dx ? props.dx : 150;
     const dy = props.dy ? props.dy : 20;
-      // Create a tree layout.
+    // Create a tree layout.
     const tree = d3.tree().nodeSize([dy, dx]);
     tree(root);
     // Compute the extent of the tree. Note that x and y are swapped here
@@ -106,14 +104,12 @@ export default function LinePlot(props) {
 
     d3.select(ref.current).node().appendChild(svg.node());
     //  Return a cleanup function that removes the SVG.
-  return () => {
-  d3.select(ref.current).selectAll("svg").remove();
+    return () => {
+      d3.select(ref.current).selectAll("svg").remove();
     };
-        }, 
 
-  ); 
+  }, [props]);
 
 
   return <div ref={ref}></div>;
-
 }

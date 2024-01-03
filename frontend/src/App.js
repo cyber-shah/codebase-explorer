@@ -1,55 +1,7 @@
-import logo from './logo.svg';
+import { Box } from '@mui/material';
 import './App.css';
 import LinePlot from './Components/LinePlot.js';
-
-const data = {
-  name: "flare",
-  children: [
-    {
-      name: "analytics",
-      children: [
-        {
-          name: "one more", size: 100
-        }
-        // ... children of "analytics" node
-      ]
-    },
-    {
-      name: "animate",
-      children: [
-        {
-          name: "Easing",
-          size: 17010
-        },
-        {
-          name: "FunctionSequence",
-          size: 5842
-        },
-        {
-          name: "interpolate",
-          children: [
-            // ... children of "interpolate" node
-          ]
-        },
-        // ... other children of "animate" node
-      ]
-    },
-    {
-      name: "data",
-      children: [
-        // ... children of "data" node
-      ]
-    },
-    {
-      name: "display",
-      children: [
-        // ... children of "display" node
-      ]
-    },
-    // ... other top-level nodes
-  ]
-};
-
+import ToolDrawer from './Components/ToolDrawer';
 
 const data2 =
 {
@@ -662,7 +614,7 @@ const data2 =
                     }
                   ],
                   "is_folder": true,
-                  "name": "reply",
+                  "name": "reply23",
                   "path": "/Users/shah/Desktop/personal-website/codebase-explorer/.cmake/api/v1/reply",
                   "size": 0
                 }
@@ -699,11 +651,34 @@ const data2 =
 };
 
 
-
 function App() {
+  const style = {
+    main: {
+      display: 'flex',
+      flexDirection: 'row',
+      height: '100vh',
+    },
+    toolbar: {
+      width: '25vw',
+      maxWidth: '300px',
+      height: '100vh',
+    },
+    data: {
+      width: '75vw',
+      height: '100vh',
+      margin: '0 auto',
+    },
+  };
+
+
   return (
-    <div className="App">
-      <LinePlot data={data2} />
+    <div className="App" style={style.main}>
+      <Box style={style.toolbar}>
+        <ToolDrawer />
+      </Box>
+      <Box style={style.data}>
+        <LinePlot data={data2} />
+      </Box>
     </div>
   );
 }
