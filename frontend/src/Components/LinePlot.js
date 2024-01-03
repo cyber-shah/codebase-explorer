@@ -37,7 +37,7 @@ export default function LinePlot(props) {
   useEffect(() => {
     // ------------------------ SVG SETUP ------------------------
     // width of the svg
-    const width = 928;
+    const width = 1500;
     // tells d3 to use the data as a hierarchy and to use the dir_children property for the children
     const root = d3.hierarchy(props.data, d => d.dir_children);
     // set the width between nodes
@@ -94,7 +94,6 @@ export default function LinePlot(props) {
       .attr("r", props.nodeSize);
 
     var text = node.append("text")
-      .attr("dy", "0.31em")
       .attr("x", d => d.dir_children ? -6 : 6)
       .attr("text-anchor", d => d.dir_children ? "end" : "start")
       .text(d => d.data.name);
@@ -112,5 +111,5 @@ export default function LinePlot(props) {
   }, [props]);
 
 
-  return <div ref={ref}></div>;
+  return <div style={{ overflow: 'auto' }} ref={ref}></div>;
 }

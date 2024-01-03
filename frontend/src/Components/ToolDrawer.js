@@ -2,11 +2,9 @@ import { Box, Divider, FormControl, InputLabel, MenuItem, Paper, Select, Stack }
 import React from 'react';
 import { Container, Typography, Button, TextField } from '@mui/material';
 import { useState } from 'react';
-import InputSlider from './ToolDrawer/Slider';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
-import ZoomOut from '@mui/icons-material/ZoomOut';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Slider from '@mui/material/Slider';
 
 export default function ToolDrawer(props) {
 
@@ -55,22 +53,75 @@ export default function ToolDrawer(props) {
             </Select>
           </FormControl>
 
-          <InputSlider name='Node Size' />
-          <InputSlider name='Gap - X' />
-          < InputSlider name='Gap - Y' />
-          < InputSlider name='Link Color' />
-          < InputSlider name='Node Color' />
-          < InputSlider name='Text Size' />
-          < InputSlider name='Text Color' />
 
           <Typography id="input-slider" gutterBottom>
             Text Size
           </Typography>
           <Box sx={{ display: 'flex', width: '100%' }} >
-            <Button variant="outlined" fullWidth endIcon={<AddIcon />} onClick={props.setTextSize()} />
-            <Button size='small' fullWidth variant="contained" endIcon={<RemoveIcon />} />
+            <Button
+              variant="outlined"
+              fullWidth
+              endIcon={<AddIcon />}
+              onClick={() => {
+                props.setTextSize(props.textSize + 1);
+                console.log(props.textSize);
+              }}
+            />
+
+            <Button
+              variant="outlined"
+              fullWidth
+              endIcon={<RemoveIcon />}
+              onClick={() => {
+                props.setTextSize(props.textSize - 1);
+                console.log(props.textSize);
+              }}
+            />
           </Box>
 
+
+
+          <Typography id="input-slider" gutterBottom>
+            Horizontal Spacing
+          </Typography>
+          <Box sx={{ display: 'flex', width: '100%' }} >
+            <Slider
+              aria-label="Temperature"
+              defaultValue={30}
+              valueLabelDisplay="auto"
+              step={20}
+              marks
+              min={100}
+              max={400}
+              onChange={(e) => {
+                props.setdx(e.target.value);
+              }}
+            />
+          </Box>
+
+
+
+          <Typography id="input-slider" gutterBottom>
+            Vertical Spacing
+          </Typography>
+          <Box sx={{ display: 'flex', width: '100%' }} >
+            <Button
+              variant="outlined"
+              fullWidth
+              endIcon={<AddIcon />}
+              onClick={() => {
+                props.setdy(props.dy + 5);
+              }}
+            />
+            <Button
+              variant="outlined"
+              fullWidth
+              endIcon={<RemoveIcon />}
+              onClick={() => {
+                props.setdy(props.dy - 5);
+              }}
+            />
+          </Box>
         </Stack>
 
       </Box>

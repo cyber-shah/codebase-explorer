@@ -675,8 +675,8 @@ function App() {
   const [directoryPath, setPath] = useState(null);
   const [treeType, setTreeType] = useState(null);
   const [nodeSize, setNodeSize] = useState(5);
-  const [dx, setdX] = useState(250);
-  const [dy, setdY] = useState(30);
+  const [dx, setdx] = useState(250);
+  const [dy, setdy] = useState(30);
   const [linkColor, setLinkColor] = useState(30);
   const [textSize, setTextSize] = useState(20);
 
@@ -686,8 +686,8 @@ function App() {
 
       <Box style={style.toolbar}>
         <ToolDrawer
-          setdX={setdX}
-          setdY={setdY}
+          setdx={setdx} dx={dx}
+          setdy={setdy} dy={dy}
           setNodeSize={setNodeSize}
           setPath={setPath}
           setLinkColor={setLinkColor}
@@ -699,7 +699,7 @@ function App() {
 
 
 
-      <Box style={style.data}>
+      <Box style={style.data} >
         <LinePlot
           data={data2}
           dx={dx}
