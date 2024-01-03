@@ -3,8 +3,10 @@ import React from 'react';
 import { Container, Typography, Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import InputSlider from './ToolDrawer/Slider';
-
-
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import ZoomOut from '@mui/icons-material/ZoomOut';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function ToolDrawer(props) {
 
@@ -15,7 +17,8 @@ export default function ToolDrawer(props) {
   };
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{ width: '100%' }} >
+
       <Container>
         <TextField
           label="Current Directory"
@@ -53,13 +56,21 @@ export default function ToolDrawer(props) {
           </FormControl>
 
           <InputSlider name='Node Size' />
-
-
           <InputSlider name='Gap - X' />
-
           < InputSlider name='Gap - Y' />
-
           < InputSlider name='Link Color' />
+          < InputSlider name='Node Color' />
+          < InputSlider name='Text Size' />
+          < InputSlider name='Text Color' />
+
+          <Typography id="input-slider" gutterBottom>
+            Text Size
+          </Typography>
+          <Box sx={{ display: 'flex', width: '100%' }} >
+            <Button variant="outlined" fullWidth endIcon={<AddIcon />} onClick={props.setTextSize()} />
+            <Button size='small' fullWidth variant="contained" endIcon={<RemoveIcon />} />
+          </Box>
+
         </Stack>
 
       </Box>

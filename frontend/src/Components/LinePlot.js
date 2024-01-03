@@ -91,15 +91,16 @@ export default function LinePlot(props) {
 
     node.append("circle")
       .attr("fill", d => d.dir_children ? "#555" : "#999")
-      .attr("r", 2.5);
+      .attr("r", props.nodeSize);
 
-    node.append("text")
+    var text = node.append("text")
       .attr("dy", "0.31em")
       .attr("x", d => d.dir_children ? -6 : 6)
       .attr("text-anchor", d => d.dir_children ? "end" : "start")
-      .text(d => d.data.name)
-      .clone(true).lower()
-      .attr("stroke", "white");
+      .text(d => d.data.name);
+    var textHeight = text.node().getBBox().height;
+    text.attr("dy", textHeight / 2)
+      .attr("font-size", `${props.textSize}px`);
     // ------------------ NODE --------------------------
 
     d3.select(ref.current).node().appendChild(svg.node());

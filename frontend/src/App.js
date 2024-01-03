@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import './App.css';
 import LinePlot from './Components/LinePlot.js';
 import ToolDrawer from './Components/ToolDrawer';
+import { useState } from 'react';
+
 
 const data2 =
 {
@@ -670,15 +672,44 @@ function App() {
     },
   };
 
+  const [directoryPath, setPath] = useState(null);
+  const [treeType, setTreeType] = useState(null);
+  const [nodeSize, setNodeSize] = useState(5);
+  const [dx, setdX] = useState(250);
+  const [dy, setdY] = useState(30);
+  const [linkColor, setLinkColor] = useState(30);
+  const [textSize, setTextSize] = useState(20);
+
 
   return (
     <div className="App" style={style.main}>
+
       <Box style={style.toolbar}>
-        <ToolDrawer />
+        <ToolDrawer
+          setdX={setdX}
+          setdY={setdY}
+          setNodeSize={setNodeSize}
+          setPath={setPath}
+          setLinkColor={setLinkColor}
+          setTextSize={setTextSize}
+          setTreeType={setTreeType}
+          textSize={textSize}
+        />
       </Box>
+
+
+
       <Box style={style.data}>
-        <LinePlot data={data2} />
+        <LinePlot
+          data={data2}
+          dx={dx}
+          dy={dy}
+          nodeSize={nodeSize}
+          linkColor={linkColor}
+          textSize={textSize}
+        />
       </Box>
+
     </div>
   );
 }
