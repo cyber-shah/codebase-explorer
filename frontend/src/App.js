@@ -4,6 +4,7 @@ import LinePlot from './Components/LinePlot.js';
 import ToolDrawer from './Components/ToolDrawer';
 import { useState } from 'react';
 import ForceTree from './Components/ForceTree';
+import { SliderPicker } from 'react-color';
 
 const data2 =
 {
@@ -700,6 +701,7 @@ function App() {
 
 
 
+
       <Box style={style.data} >
 
         <LinePlot
@@ -717,6 +719,8 @@ function App() {
           data={data2}
         />
       </Box>
+
+
 
     </div>
   );
