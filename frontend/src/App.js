@@ -3,7 +3,7 @@ import './App.css';
 import LinePlot from './Components/LinePlot.js';
 import ToolDrawer from './Components/ToolDrawer';
 import { useState } from 'react';
-
+import ForceTree from './Components/ForceTree';
 
 const data2 =
 {
@@ -701,6 +701,14 @@ function App() {
 
       <Box style={style.data} >
         <LinePlot
+          data={data2}
+          dx={dx}
+          dy={dy}
+          nodeSize={nodeSize}
+          linkColor={linkColor}
+          textSize={textSize}
+        />
+        < ForceTree
           data={data2}
           dx={dx}
           dy={dy}
