@@ -6,8 +6,8 @@ import { useState } from 'react';
 import ForceTree from './Components/ForceTree';
 import { SliderPicker } from 'react-color';
 import MenuIcon from '@mui/icons-material/Menu';
-import { TreeView } from '@mui/x-tree-view/TreeView';
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
+// import { TreeView } from '@mui/x-tree-view/TreeView';
+// import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
 //TODO: use this treeview inside toolbar
 
@@ -665,18 +665,16 @@ function App() {
       height: '100vh',
     },
     toolbarContainer: {
-      width: '25vw',
       maxWidth: '300px',
       padding: '10px',
       backgroundColor: 'white',
       position: 'fixed',
       top: 0,
       left: 0,
-      height: '100vh',
       zIndex: 1000,
     },
     dataContainer: {
-      width: '75vw',
+      width: '100%',
       height: '100vh',
       margin: '0 auto',
       overflow: 'auto', // Add this to enable scrolling if needed

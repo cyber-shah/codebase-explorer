@@ -1,13 +1,4 @@
-TODO:
-
-3. resource management:
-  - gprof or perf for CPU profiling
-  - valgrind for memory profiling
-  - file size profiling
-4. convert perf report to a json object, which can be used to display the graph
-
-
-
+![scresenshot](./screenshots/dirTree.png)
 # Codebase Explorer
 Codebase Explorer is an open-source project designed to facilitate a deeper understanding and effective management of a project's codebase. Whether you're a developer new to a project or a seasoned contributor, Codebase Explorer offers valuable insights into the structure, dependencies, and performance metrics of your code.
 
