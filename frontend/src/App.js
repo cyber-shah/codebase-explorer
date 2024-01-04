@@ -677,23 +677,24 @@ function App() {
   const [nodeSize, setNodeSize] = useState(5);
   const [dx, setdx] = useState(250);
   const [dy, setdy] = useState(30);
-  const [linkColor, setLinkColor] = useState(30);
+  const [linkColor, setLinkColor] = useState('#000000');
   const [textSize, setTextSize] = useState(20);
-
+  const [nodeColor, setNodeColor] = useState('#000000');
 
   return (
     <div className="App" style={style.main}>
 
       <Box style={style.toolbar}>
         <ToolDrawer
-          setdx={setdx} dx={dx}
-          setdy={setdy} dy={dy}
+          setdx={setdx}
+          setdy={setdy}
           setNodeSize={setNodeSize}
           setPath={setPath}
           setLinkColor={setLinkColor}
           setTextSize={setTextSize}
           setTreeType={setTreeType}
           textSize={textSize}
+          setNodeColor={setNodeColor}
         />
       </Box>
 
@@ -707,6 +708,7 @@ function App() {
           nodeSize={nodeSize}
           linkColor={linkColor}
           textSize={textSize}
+          nodeColor={nodeColor}
         />
       </Box>
 
