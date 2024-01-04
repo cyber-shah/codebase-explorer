@@ -701,6 +701,7 @@ function App() {
 
 
       <Box style={style.data} >
+
         <LinePlot
           data={data2}
           dx={dx}
@@ -710,13 +711,10 @@ function App() {
           textSize={textSize}
           nodeColor={nodeColor}
         />
+
+
         < ForceTree
           data={data2}
-          dx={dx}
-          dy={dy}
-          nodeSize={nodeSize}
-          linkColor={linkColor}
-          textSize={textSize}
         />
       </Box>
 
