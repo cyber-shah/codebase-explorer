@@ -70,7 +70,7 @@ export default function LinePlot(props) {
     // TODO: learn how this works
     const link = svg.append("g")
       .attr("fill", "none")
-      .attr("stroke", props.stroke ? props.stroke : "#555")
+      .attr("stroke", props.linkColor)
       .attr("stroke-opacity", props.strokeOpacity ? props.strokeOpacity : 0.4)
       .attr("stroke-width", props.strokeWidth ? props.strokeWidth : 1.5)
       .selectAll()
@@ -90,7 +90,7 @@ export default function LinePlot(props) {
       .attr("transform", d => `translate(${d.y},${d.x})`);
 
     node.append("circle")
-      .attr("fill", d => d.dir_children ? "#555" : "#999")
+      .attr("fill", props.nodeColor)
       .attr("r", props.nodeSize);
 
     var text = node.append("text")

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Slider from '@mui/material/Slider';
+import { HuePicker } from 'react-color';
 
 export default function ToolDrawer(props) {
 
@@ -81,7 +82,7 @@ export default function ToolDrawer(props) {
 
 
 
-          <Typography id="input-slider" gutterBottom>
+          <Typography gutterBottom>
             Horizontal Spacing
           </Typography>
           <Box sx={{ display: 'flex', width: '100%' }} >
@@ -100,33 +101,45 @@ export default function ToolDrawer(props) {
           </Box>
 
 
-
-          <Typography id="input-slider" gutterBottom>
+          <Typography gutterBottom>
             Vertical Spacing
           </Typography>
           <Box sx={{ display: 'flex', width: '100%' }} >
-            <Button
-              variant="outlined"
-              fullWidth
-              endIcon={<AddIcon />}
-              onClick={() => {
-                props.setdy(props.dy + 5);
-              }}
-            />
-            <Button
-              variant="outlined"
-              fullWidth
-              endIcon={<RemoveIcon />}
-              onClick={() => {
-                props.setdy(props.dy - 5);
+            <Slider
+              aria-label="Temperature"
+              defaultValue={30}
+              valueLabelDisplay="auto"
+              step={5}
+              marks
+              min={10}
+              max={100}
+              onChange={(e) => {
+                props.setdy(e.target.value);
               }}
             />
           </Box>
+
+
+
+
         </Stack>
 
       </Box>
 
       < Divider />
+
+      < HuePicker
+        onChange={(color) => {
+          props.setNodeColor(color.hex);
+          props.setLinkColor(color.hex);
+        }}
+        onChangeComplete={(color) => {
+          props.setNodeColor(color.hex);
+          props.setLinkColor(color.hex);
+        }} />
+
+
+
     </Paper >
 
   );
