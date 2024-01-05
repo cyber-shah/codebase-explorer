@@ -1,17 +1,16 @@
-import fs from 'fs';
 import { Controller } from './controller/controller.js';
-import { CliPrint } from './view/cliPrint.js';
 
+const inputPath = process.cwd();
+console.log(`Input path: ${inputPath}`);
 
-const main = async () => {
-  const view = new CliPrint();
-  const controller = new Controller(view);
-  const currentPath = process.cwd(); // Get the current working directory
+const main = async (inputPath) => {
+  const controller = new Controller();
 
-  await controller.buildTree(currentPath);
-  controller.showDirTree();
+  await controller.buildDirTree(inputPath);
+  controller.exportDepTree();
 
+  console.log(controller.exportDepTree());
 };
 
-main();
+main(inputPath.toString());
 

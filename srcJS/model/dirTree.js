@@ -26,7 +26,6 @@ class DirTreeManager {
     this.dirRoot = root;
     //TODO: add setters here.
 
-
     // 3. Build tree from this root node
     await this.buildTreeRecursive(root);
     return root;
@@ -52,6 +51,7 @@ class DirTreeManager {
         dirChildren: [],
         isFolder: stats.isDirectory(),
         name: path.basename(entry),
+        size: stats.size,
       };
 
       // 3. Add the child to the children array of the current node
@@ -68,17 +68,9 @@ class DirTreeManager {
         await this.buildTreeRecursive(child);
       }
     }
-
   }
 
 
 }
-
-function pathRelative(path) {
-  // Use path relative to the current working directory
-  return path;
-}
-
-
 
 export { DirTreeManager };
