@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 class DirTreeManager {
   constructor() {
@@ -89,4 +89,6 @@ function pathRelative(path) {
   return path;
 }
 
-module.exports = DirTreeManager;
+
+
+export { DirTreeManager };
