@@ -1,4 +1,5 @@
-const ViewInterface = require("./viewInterface.js");
+import { ViewInterface } from "./viewInterface.js";
+
 
 class CliPrint extends ViewInterface {
   constructor() {
@@ -42,4 +43,4 @@ class CliPrint extends ViewInterface {
   }
 }
 
-module.exports = CliPrint;
+export { CliPrint };

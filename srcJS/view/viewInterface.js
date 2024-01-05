@@ -23,4 +23,4 @@ class ViewInterface {
   destructor() { }
 }
 
-module.exports = ViewInterface;
+export { ViewInterface };

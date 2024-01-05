@@ -1,12 +1,12 @@
-const fs = require('fs');
-const dirTreeManager = require('../model/dirTree');
-const depTreeManager = require('../model/depTree');
+import fs from 'fs';
+import { DepTreeManager } from '../model/depTree.js'
+import { DirTreeManager } from '../model/dirTree.js'
 
 class Controller {
   constructor(view) {
     this.view = view;
-    this.dirTree = new dirTreeManager();
-    this.depTree = new depTreeManager(this.dirTree);
+    this.dirTree = new DirTreeManager();
+    this.depTree = new DepTreeManager(this.dirTree);
     this.root = null;
     // Additional initialization if needed
   }
@@ -32,4 +32,4 @@ class Controller {
   }
 }
 
-module.exports = Controller;
+export { Controller };

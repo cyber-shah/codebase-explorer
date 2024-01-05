@@ -1,13 +1,26 @@
-import { DirTreeManager } from './model/dirTree.js';
+import fs from 'fs';
+import { Controller } from './controller/controller.js';
+import { CliPrint } from './view/cliPrint.js';
 
 
-function main() {
+const main = async () => {
+  const view = new CliPrint();
+  const controller = new Controller(view);
   const currentPath = process.cwd(); // Get the current working directory
-  const dirTreeManager = new DirTreeManager();
-  dirTreeManager.buildTree(currentPath);
 
+  try {
+    // Ensure currentPath is a valid directory
+    const stats = await fs.promises.stat(currentPath);
+    if (!stats.isDirectory()) {
+      throw new Error(`${currentPath} is not a directory.`);
+    }
+
+    controller.buildTree(currentPath);
+    controller.parseDependencies();
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
 };
-
 
 main();
 

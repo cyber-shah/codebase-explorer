@@ -1,4 +1,5 @@
-const fs = require('fs');
+import fs from 'fs';
+
 
 class DepTreeManager {
   constructor(dirTree) {
@@ -52,4 +53,4 @@ class DepTreeManager {
   }
 }
 
-module.exports = DepTreeManager;
+export { DepTreeManager };

@@ -1,4 +1,6 @@
 import fs from 'fs';
+import path from 'path';
+
 
 class DirTreeManager {
   constructor() {
@@ -17,13 +19,13 @@ class DirTreeManager {
       path: currentDir,
       children: [],
       isFolder: true,
-      name: '',
-      // Add any other attributes you need from update_attributes()
+      name: path.basename(currentDir),
     };
 
     // 2. Set the root node
     this.dirRoot = root;
-    this.dirMap.set(pathRelative(root.path), root);
+    //TODO: add setters here.
+
 
     // 3. Build tree from this root node
     this.buildTreeRecursive(root);
@@ -63,8 +65,8 @@ class DirTreeManager {
       const child = {
         path: entry,
         children: [],
-        isFolder: fs.statSync(entry).isDirectory(),
-        name: '', // Add any other attributes you need from update_attributes()
+        isFolder: fs.stat(entry).isDirectory(),
+        name: path.basename(entry),
       };
 
       // 3. Add the child to the children array of the current node
