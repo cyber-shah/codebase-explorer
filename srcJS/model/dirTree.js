@@ -13,11 +13,11 @@ class DirTreeManager {
    * @param currentDir - The current directory
    * @return The root node of the tree
    */
-  buildTree(currentDir) {
+  async buildTree(currentDir) {
     // 1. Create a root node here
     const root = {
       path: currentDir,
-      children: [],
+      dirChildren: [],
       isFolder: true,
       name: path.basename(currentDir),
     };
@@ -28,50 +28,35 @@ class DirTreeManager {
 
 
     // 3. Build tree from this root node
-    this.buildTreeRecursive(root);
+    await this.buildTreeRecursive(root);
     return root;
   }
 
-  /**
-   * @brief Finds a node by path
-   * @param pathToNode - The path to the node
-   * @return The found node or null if not found
-   */
-  findNodeByPath(pathToNode) {
-    return this.dirMap.get(pathRelative(pathToNode)) || null;
-  }
-
-  /**
-   * @brief Finds a node by name
-   * @param nodeName - The name of the node
-   * @return The found node or null if not found
-   */
-  findNodeByName(nodeName) {
-    for (const [_, node] of this.dirMap) {
-      if (node && node.name === nodeName) {
-        return node;
-      }
-    }
-    return null;
-  }
 
   /**
    * Builds tree recursively from the current node as the root node
    */
-  buildTreeRecursive(currentNode) {
+  async buildTreeRecursive(currentNode) {
+
+    // wait out for the entries to be read
+    const entries = await fs.promises.readdir(currentNode.path);
+
     // 1. Iterate through all the entries in the current directory
-    for (const entry of fs.readdirSync(currentNode.path)) {
+    for (const entry of entries) {
+      const entryPath = path.join(currentNode.path, entry);
+      const stats = await fs.promises.stat(entryPath);
+
       // 2. Create a child node for each entry
       const child = {
         path: entry,
-        children: [],
-        isFolder: fs.stat(entry).isDirectory(),
+        dirChildren: [],
+        isFolder: stats.isDirectory(),
         name: path.basename(entry),
       };
 
       // 3. Add the child to the children array of the current node
-      currentNode.children.push(child);
-      this.dirMap.set(pathRelative(child.path), child);
+      currentNode.dirChildren.push(child);
+      this.dirMap.set(child.path, child);
 
       // 4. If the child is a folder, recursively call this function
       if (child.isFolder) {
@@ -80,10 +65,13 @@ class DirTreeManager {
           continue;
         }
         // Recursively build tree for the child
-        this.buildTreeRecursive(child);
+        await this.buildTreeRecursive(child);
       }
     }
+
   }
+
+
 }
 
 function pathRelative(path) {

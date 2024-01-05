@@ -15,8 +15,8 @@ class Controller {
    * @brief Build the tree
    * Takes no arguments but passes the current path to the tree builder
    */
-  buildTree(path) {
-    this.root = this.dirTree.buildTree(path);
+  async buildTree(path) {
+    this.root = await this.dirTree.buildTree(path);
   }
 
   parseDependencies() {

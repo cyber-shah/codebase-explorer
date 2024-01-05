@@ -27,7 +27,7 @@ class CliPrint extends ViewInterface {
       console.log(`|-- ${currentNode.name} size: ${currentNode.size}`);
 
       // Push children onto the stack with increased depth
-      for (const child of currentNode.dirChildren.values()) {
+      for (const child of currentNode.dirChildren) {
         nodeStack.push({ node: child, depth: depth + 1 });
       }
     }
