@@ -5,7 +5,7 @@ import path from 'path';
 class DirTreeManager {
   constructor() {
     this.dirRoot = null;
-    this.dirMap = new Map();
+    this.files = {};
   }
 
   /**
@@ -13,7 +13,7 @@ class DirTreeManager {
    * @param currentDir - The current directory
    * @return The root node of the tree
    */
-  async buildTree(currentDir) {
+  async buildDirTree(currentDir) {
     // 1. Create a root node here
     const root = {
       path: currentDir,
@@ -24,10 +24,9 @@ class DirTreeManager {
 
     // 2. Set the root node
     this.dirRoot = root;
-    //TODO: add setters here.
 
     // 3. Build tree from this root node
-    await this.buildTreeRecursive(root);
+    await this.buildDirTreeRecursive(root);
     return root;
   }
 
@@ -35,7 +34,7 @@ class DirTreeManager {
   /**
    * Builds tree recursively from the current node as the root node
    */
-  async buildTreeRecursive(currentNode) {
+  async buildDirTreeRecursive(currentNode) {
 
     // wait out for the entries to be read
     const entries = await fs.promises.readdir(currentNode.path);
@@ -65,7 +64,7 @@ class DirTreeManager {
           continue;
         }
         // Recursively build tree for the child
-        await this.buildTreeRecursive(child);
+        await this.buildDirTreeRecursive(child);
       }
     }
   }
