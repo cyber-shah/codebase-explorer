@@ -12,9 +12,7 @@ public:
 
   // Constructor
   Controller(viewInterface &view)
-      : view(view), dirTree(), depTree(this->dirTree) {
-    // Additional initialization if needed
-  }
+      : view(view), dirTree(), depTree(this->dirTree) {}
 
   /**
    * @brief Build the tree

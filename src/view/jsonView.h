@@ -7,6 +7,10 @@
 using json = nlohmann::json;
 using namespace std;
 
+/**
+ * This class converts the dirMap - which is a hashmap of nodes
+ * into a json object
+ */
 class jsonView : public viewInterface {
 public:
   json dir_tree;
@@ -18,7 +22,7 @@ public:
   jsonView() {}
 
   // TODO: also store pointers to the nodes
-  void show_dir_tree(const std::shared_ptr<nodeInterface> root) const override {
+  void show_dir_tree(const std::shared_ptr<nodeInterface> root) override {
     // create the root json object
     json dir_tree;
 
@@ -35,7 +39,7 @@ public:
     cout << dir_tree.dump(2) << endl;
   };
 
-  void show_dep_tree(const std::shared_ptr<nodeInterface> root) const override {
+  void show_dep_tree(const std::shared_ptr<nodeInterface> root) override {
     // create the root json object
     json dep_tree;
 
@@ -46,7 +50,7 @@ public:
 
 private:
   void add_children_recursive_dir(json &dir_tree,
-                                  std::shared_ptr<nodeInterface> root) const {
+                                  std::shared_ptr<nodeInterface> root) {
 
     // create an array for children at this level
     json dir_children_array = json::array();
@@ -75,6 +79,12 @@ private:
     dir_tree["dir_children"] = dir_children_array;
   }
 
+  /**
+   * Recursively add children to the dep_tree
+   * 1. Create a json object for each child
+   * 2. Add the children to the root json object
+   * 3. If the child has children, add them recursively
+   */
   void add_children_recursive_dep(json &dep_tree,
                                   std::shared_ptr<nodeInterface> root) const {
 

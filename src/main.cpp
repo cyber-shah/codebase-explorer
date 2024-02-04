@@ -1,11 +1,10 @@
 #include "controller/controller.h"
-#include "view/cliPrint.h"
-#include "view/jsonView.h"
+#include "view/terminalView.h"
 
 int main() {
-  jsonView view;
+  terminalView term_view;
 
-  Controller con(view);
+  Controller con(term_view);
   con.build_tree(std::filesystem::current_path());
   con.parse_dependencies();
   con.show_dir_tree();
